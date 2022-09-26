@@ -1,0 +1,243 @@
+#+title: Flugten på Dune
+#+options: ^:{}
+
+#+attr_org: :width 700px
+[[./img/dune.jpg]]
+
+Her er et tekstbaseret spil inspireret af [[https://www.atariarchives.org/morebasicgames/showpage.php?page=24][spillet Camel]] fra 1979 samt bogen/filmen Dune.
+Idéen er at I skal flygte fra Harkonnens soldater gennem Arrakis' ørken. Mens I gør dette, skal I holde styr på jeres træthed, jeres tørst samt, hvor langt efter jer Harkonnens soldater er. I må gerne gerne lave om i historien, men elementerne i spillet skal være de samme.
+
+For at kunne udvikle dette spil forudsættes det, at I har styr på indholdet i [[https://github.com/Vibenshus-Gymnasium-Programmering/Arcade_praesentationer/blob/main/06_Betinget_udfoerelse/06_Betinget_udfoerelse.org][06_Betinget_udfoerelse]] og [[https://github.com/Vibenshus-Gymnasium-Programmering/Arcade_praesentationer/blob/main/07_tilfældige_tal/07_tilfældige_tal.org][07_tilfældige_tal]].
+
+* Eksempel på spillets gang
+
+Her kan I se outputtet fra en enkelt kørsel af spillet.
+
+#+begin_example
+Velkommen til Dune!
+
+Harkonnens soldater har netop taget magten over Arrakis, ved at slå din far,
+Hertug Leto Atreides ihjel. Du, Paul Atreides, og din mor Lady Jessica skal
+flygte fra soldaterne. Den eneste vej er gennem Arrakis' nådesløse ørken.
+Overlev turen igennem ørkenen og løb fra jeres forfølgere!
+
+A - Drik vand fra jeres flaske.
+B - Fremad i moderat tempo.
+C - Fremad med fuld fart.
+D - Stop op og hvil.
+E - Statustjek.
+Q - Luk (Quit)
+Jeres valg? c
+
+I rejste 12 km.
+
+A - Drik vand fra jeres flaske.
+B - Fremad i moderat tempo.
+C - Fremad med fuld fart.
+D - Stop op og hvil.
+E - Statustjek.
+Q - Luk (Quit)
+Jeres valg? c
+
+I rejste 17 km.
+
+A - Drik vand fra jeres flaske.
+B - Fremad i moderat tempo.
+C - Fremad med fuld fart.
+D - Stop op og hvil.
+E - Statustjek.
+Q - Luk (Quit)
+Jeres valg? e
+
+Status:
+Km rejst: 29
+Slurke tilbage i flasken: 3
+Harkonnens soldater er 31 km bag jer.
+
+A - Drik vand fra jeres flaske.
+B - Fremad i moderat tempo.
+C - Fremad med fuld fart.
+D - Stop op og hvil.
+E - Statustjek.
+Q - Luk (Quit)
+Jeres valg? b
+
+I rejste 6 km.
+
+...og således fortsætter det, indtil...
+
+A - Drik vand fra jeres flaske.
+B - Fremad i moderat tempo.
+C - Fremad med fuld fart.
+D - Stop op og hvil.
+E - Statustjek.
+Q - Luk (Quit)
+Jeres valg? C
+
+I rejste 12 km.
+Harkonnens soldater haler ind på jer!
+
+A - Drik vand fra jeres flaske.
+B - Fremad i moderat tempo.
+C - Fremad med fuld fart.
+D - Stop op og hvil.
+E - Statustjek.
+Q - Luk (Quit)
+Jeres valg? C
+
+I rejste 11 km.
+Harkonnens soldater haler ind på jer!
+Du og Lady Jessica nåede i sikkerhed hos frimenerne!
+Æret været den store Muad'dib!
+#+end_example
+
+** Guide til udvikling af spillet
+
+1. Anvend filen ~Opgave_4.py~ til at skrive jeres program i.
+ 
+2. Lav en ~main~-funktion, som kaldes til sidst i programmet.
+   - Til at begynde med skal mainfunktionen printe velkomsten ud.
+     #+begin_example
+     Velkommen til Dune!
+     
+     Harkonnens soldater har netop taget magten over Arrakis, ved at slå din far,
+     Hertug Leto Atreides ihjel. Du, Paul Atreides, og din mor Lady Jessica skal
+     flygte fra soldaterne. Den eneste vej er gennem Arrakis' nådesløse ørken.
+     Overlev turen igennem ørkenen og løb fra jeres forfølgere!
+     #+end_example
+   - Brug flere print statements i stedet for en lang.
+   - Kald ~main~-funktionen til sidst og tjek at programmet virker efter hensigten.
+
+3. Fortsæt, hvor I slap i ~main~-funktionen, og opret en boolsk variabel kaldet ~faerdig~ (eller lignende) og sæt den til ~False~.
+   - Sørg for at dette og alt andet indtil videre foregår i ~main~-funktionen.
+
+4. Lav en ~while~-løkke, som kører hele tiden så længe ~faerdig~ er ~False~.
+
+5. Inde i ~while~-løkken skal I printe valgmulighederne ud:
+
+   #+begin_example
+   A - Drik vand fra jeres flaske.
+   B - Fremad i moderat tempo.
+   C - Fremad med fuld fart.
+   D - Stop op og hvil.
+   E - Statustjek.
+   Q - Luk (Quit)
+   #+end_example
+
+6. Spørg nu brugeren efter et valg. Husk mellemrum efter spørgsmålstegnet. Det skal gerne ligne det følgende:
+
+   #+begin_example
+   Jeres valg? C
+   #+end_example
+
+7. Få programmet til at kunne lukke ned.
+   - Hvis brugeren taster *Q* skal ~faerdig~ sættes til ~True~.
+   - I kan anvende noget a la ~valg.lower()~ i stedet for bare ~valg~ i jeres if statement, så kan brugeren både taste *Q* og *q*.
+   - Sørg for at skrive en lille tekst ud til brugeren, som fortæller at programmet lukker ned.
+
+8. Afprøv jeres program, og se om I kan få det til at lukke, både når I taster *Q* og *q*.
+
+9. Deklaration af variable.
+   - Før selve main-funktionen skal I oprette variable, som kan holde styr på *antal km rejst*, hvor *tørstige* vores hovedpersoner er og endelig hvor *trætte* vores hovedpersoner er.
+   - Giv variablerne nogle passende navne, så I ikke behøver at skrive kommentarer til dem.
+
+10. Opret en variabel, som holder styr på hvor langt Harkonnens soldater har rejst.
+    - Sæt i første omgang denne variabel til -20. Soldaterne starter altså 20 km bag vores helte.
+
+11. Opret en variabel, som holder styr på hvor mange slurke, der er tilbage i heltenes vandflaske. Sæt denne variabel til 3 til at begynde med.
+
+12. Gå tilbage til ~main~-funktionen.
+    - Tilføj et ~elif~ efter det ~if~, som tjekker for luk-inputtet (quit). I dette ~elif~-statement skal I tjekke om brugeren vil se *status*, altså trykker på *E* jævnfør oplægget.
+    - Hvis brugeren trykker på *E* (eller *e*), skal der skrives en oversigt ud til brugeren, som ligner denne:
+      
+      #+begin_example
+      Status:
+      Km rejst: 29
+      Slurke tilbage i flasken: 3
+      Harkonnens soldater er 31 km bag jer.
+      #+end_example
+
+13. Tilføj endnu et ~elif~ om hvil.
+    - Tjek om brugeren har tastet *D* og vil stoppe op og hvile.
+    - Hvis brugeren taster *D* skal træthed sættes tilbage til 0 (nul).
+    - Udskriv til brugeren, at Paul og Lady Jessica er friske igen.
+    - Lad Harkonnens soldater bevæge sig en *tilfældig* afstand mellem 7 og 14 km fremad. Sørg for at det tilfældige tal beregnes *inde under* while-løkken, så der faktisk kommer forskellige tal for hver gang.
+    
+14. Tilføj et ~elif~ om fuld fart frem
+    - Tjek om brugeren har tastet *C* og vil fremdad med fuld fart.
+    - Hvis brugeren har tastet dette, så Paul og Lady Jessica bevæges fremad med et tilfældigt tal mellem 10 og 20, begge tal inklusiv.
+    - Udskriv, hvor langt vores helte har rejst.
+    - Tilføj 1 til tørst.
+    - Tilføj et tilfældigt tal mellem 1 og 3 til træthed.
+    - Bevæg Harkonnens soldater fremad med et tilfældigt tal mellem 7 og 14, begge tal inklusiv.
+
+15. Tilføj et ~elif~ om fremad i moderat tempo.
+    - Tjek om brugeren taster *B*.
+    - Hvis brugeren gør dette, skal vores helte bevæge sig fremad med et tilfældigt tal fra og med 5 til og med 12, altså lidt langsommere end Harkonnens soldater.
+    - Udskriv, hvor langt vores helte har rejst.
+    - Tilføj 1 til tørst.
+    - Tilføj 1 til træthed.
+
+16. Tilføj et ~elif~ om at drikke vand.
+    - Tjek om brugeren taster *A*.
+    - Hvis brugeren gør dette, skal der tjekkes om der er vand tilbage i flasken.
+    - Hvis der er vand tilbage, skal tørsten nulstilles, og der skal trækkes 1 fra antallet af slurke tilbage i flasken.
+    - Hvis der ikke er flere slurke tilbage, skal I skrive en besked ud til brugeren om dette.
+
+17. Udskriv: "Du og Lady Jessica er tørstige."
+    - I while-løkken i main-funktionen skal I udskrive "Du og Lady Jessica er tørstige.", hvis tørsten er over 4.
+    - Sæt dette som et nyt ~if~-statement efter jeres lange ~if~ ... ~elif~ sammenkædning.
+
+18. Udskriv: "Du og Lady Jessica døde af tørst!"
+    - Udskriv den viste tekst, hvis tørst er over 6.
+    - Sæt ~faerdig~ til ~True~.
+    - Sørg for at jeres program i udskriver både, "Du og Lady Jessica er tørstige." og "Du og Lady Jessica døde af tørst!" i samme runde. Dette kan I sørge for ved at anvende ~elif~ hensigtsmæssigt.
+
+19. Udskriv: "Du og Lady Jessica er trætte."
+    - Udskriv den viste tekst, hvis træthed er over 5.
+
+20. Udskriv: "Du og Lady Jessica døde af udmattelse."
+    - Udskriv den viste tekst, hvis træthed er over 8.
+    - Sørg igen for, at begge tekster omkring træthed ikke bliver udskrevet i samme runde.
+    - Der skal heller ikke stå at du og Lady Jessica er trætte eller døde af udmattelse, hvis de allerede er døde af tørst først. Det samme gælder selvfølgelig også den anden vej rundt.
+
+21. Tjek om Harkonnens soldater har indhentet vores helte.
+    - Dette er et simpelt regnestykke. Find lige ud af, hvordan det udregnes og tjekkes i et ~if~-statement
+    - Hvis Harkonnens soldater er længere fremme eller er lige så langt fremme som vores helte, så skal spillet stoppe.
+    - Udskriv en besked til brugeren om at heltene er fanget og spillet er slut.
+
+22. Hvis Harkonnens soldater er inden for 15 km fra vores helte, skal der udskrives "Harkonnens soldater haler ind på jer!".
+
+23. Hvis vores helte når 200 km eller mere hen over Arrakis' ørken, så er spillet vundet.
+    - Udskriv til brugeren at spillet er vundet.
+    - Sørg for at Paul og Lady Jessica hverken er døde af tørst eller af udmattelse, før end I skriver at spillet er vundet.
+
+24. Bonusopgave 1:
+    - Tilføj en chance på 1/20 for at finde en oase.
+    - Man kan kun finde en oase, hvis Paul og Lady Jessica rejser.
+    - Nulstil tørst og træthed.
+    - Udskriv det til brugeren.
+
+25. Bonusopgave 2:
+    - Tilføj en risiko på 1/30 for at en sandorm finder og fortærer Paul og Lady Jessica.
+    - Sandormen kan kun finde de flygtende, hvis de rejser.
+    - Sandormen æder de rejsende, hvis den finder dem og spillet er slut.
+    - Udskriv det til brugeren.
+    
+26. *Spil jeres spil igennem mange gange*.
+    - Justér på de valgte tal i spillet, så spillet bliver udfordrende men ikke umuligt at gennemføre.
+    - Fiks alle bugs, I finder undervejs.
+
+* Hints
+- Husk at det er en god idé at adskille forskellige kodestumper med blanker linjer. Husk at tilføje kommentarer i kode, hvor det vil hjælpe læseren med forståelsen.
+- Det er god stil i python at skrive ~while not faerdig:~ i stedet for ~while faerdig == False:~
+- I stedet for at sætte ~faerdig~ til ~True~ kan man bryde ud af en løkke ved at anvende ~break~. Nogle programmører foretrækker den ene løsning, mens andre foretrækker den anden. Begge dele fungerer.
+- Undgå kombinationer af meddelelser til brugeren, som ikke giver mening. F.eks. giver det ikke mening at udskrive "Du og Lady Jessica fandt en oase. I er nu veludhvilede og ikke tørstige længere" samtidig med "Du og Lady Jessica døde af udmattelse." i samme runde. For at komme omkring dette kan man f.eks. anvende ~and~ i sine ~if~-staments.
+
+
+
+Sæt igang!
+
+#+attr_org: :width 400
+#+attr_html: :width 400
+[[./img/dune.gif]]
